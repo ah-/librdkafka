@@ -1,2 +1,5 @@
+before_build:
+  - nuget restore win32/librdkafka.sln
+
 build:
   project: win32/librdkafka.sln
