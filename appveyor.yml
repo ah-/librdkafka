@@ -1,0 +1,2 @@
+build:
+  project: win32/librdkafka.sln
