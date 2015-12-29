@@ -173,7 +173,7 @@ static int64_t rd_kafka_offset_file_read (rd_kafka_toppar_t *rktp) {
 	char buf[22];
 	char *end;
 	int64_t offset;
-	int r;
+	size_t r;
 
 	if (fseek(rktp->rktp_offset_fp, 0, SEEK_SET) == -1) {
 		rd_kafka_op_err(rktp->rktp_rkt->rkt_rk,
@@ -747,7 +747,7 @@ static char *mk_esc_filename (const char *in, char *out, size_t out_size) {
 
         while (*s) {
                 const char *esc;
-                int esclen;
+                size_t esclen;
 
                 switch (*s)
                 {
