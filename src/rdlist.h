@@ -37,7 +37,7 @@
 
 typedef struct rd_list_s {
         size_t rl_size;
-        int    rl_cnt;
+        size_t rl_cnt;
         void **rl_elems;
 	void (*rl_free_cb) (void *);
 	int    rl_allocated;

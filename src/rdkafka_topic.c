@@ -784,7 +784,7 @@ void rd_kafka_topic_partitions_remove (rd_kafka_itopic_t *rkt) {
 	rd_kafka_toppar_t *rktp;
         shptr_rd_kafka_toppar_t *s_rktp;
         shptr_rd_kafka_itopic_t *s_rkt;
-	int i;
+	size_t i;
 
 	s_rkt = rd_kafka_topic_keep(rkt);
 	rd_kafka_topic_wrlock(rkt);

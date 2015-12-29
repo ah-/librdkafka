@@ -79,7 +79,7 @@ rd_kafka_range_assignor_assign_cb (rd_kafka_t *rk,
                  * each consumer. */
                 numPartitionsPerConsumer =
                         eligible_topic->metadata->partition_cnt /
-                        (int) rd_list_cnt(&eligible_topic->members);
+                        rd_list_cnt(&eligible_topic->members);
 
                 /* If it does not evenly divide, then the first few consumers
                  * will have one extra partition. */
