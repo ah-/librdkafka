@@ -97,7 +97,7 @@ void msghdr_print (rd_kafka_t *rk,
 		   const char *what, const struct msghdr *msg,
 		   int hexdump) {
 	int i;
-	int len = 0;
+	size_t len = 0;
 
 	printf("%s: iovlen %"PRIdsz"\n", what, (size_t)msg->msg_iovlen);
 
