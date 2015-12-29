@@ -1540,7 +1540,7 @@ static int rd_kafka_compress_MessageSet_buf (rd_kafka_broker_t *rkb,
 		siov.iov_base = rd_malloc(siov.iov_len);
 
 		strm.next_out = (void *)siov.iov_base;
-		strm.avail_out = siov.iov_len;
+		strm.avail_out = (uInt) siov.iov_len;
 
 		/* Iterate through each message and compress it. */
 		for (i = iov_firstmsg ;
@@ -1551,7 +1551,7 @@ static int rd_kafka_compress_MessageSet_buf (rd_kafka_broker_t *rkb,
 
 			strm.next_in = (void *)rkbuf->rkbuf_msg.
 				msg_iov[i].iov_base;
-			strm.avail_in = rkbuf->rkbuf_msg.msg_iov[i].iov_len;
+			strm.avail_in = (uInt) rkbuf->rkbuf_msg.msg_iov[i].iov_len;
 
 			/* Compress message */
 			if ((r = deflate(&strm, Z_NO_FLUSH) != Z_OK)) {
