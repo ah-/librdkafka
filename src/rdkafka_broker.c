@@ -888,7 +888,7 @@ static int rd_kafka_req_response (rd_kafka_broker_t *rkb,
  */
 static void rd_kafka_msghdr_rebuild (struct msghdr *dst, size_t dst_len,
 				     struct msghdr *src,
-				     off_t of) {
+				     ssize_t of) {
 	int i;
 	size_t len = 0;
 	void *iov = dst->msg_iov;
@@ -897,7 +897,7 @@ static void rd_kafka_msghdr_rebuild (struct msghdr *dst, size_t dst_len,
 	dst->msg_iovlen = 0;
 
 	for (i = 0 ; i < (int)src->msg_iovlen ; i++) {
-		off_t vof = of - len;
+		ssize_t vof = of - len;
 
 		if (vof < 0)
 			vof = 0;
