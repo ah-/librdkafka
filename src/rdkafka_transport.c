@@ -779,7 +779,7 @@ int rd_kafka_transport_framed_recvmsg (rd_kafka_transport_t *rktrans,
 				       rd_kafka_buf_t **rkbufp,
 				       char *errstr, size_t errstr_size) {
 	rd_kafka_buf_t *rkbuf = rktrans->rktrans_recv_buf;
-	int r;
+	ssize_t r;
 	const int log_decode_errors = 0;
 
 	/* States:
