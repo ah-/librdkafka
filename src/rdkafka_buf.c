@@ -478,7 +478,8 @@ void rd_kafka_buf_callback (rd_kafka_broker_t *rkb, rd_kafka_resp_err_t err,
  */
 rd_kafkap_bytes_t *rd_kafkap_bytes_from_buf (const rd_kafka_buf_t *rkbuf) {
         rd_kafka_assert(NULL, rkbuf->rkbuf_msg.msg_iovlen == 1);
-        return rd_kafkap_bytes_new(rkbuf->rkbuf_wbuf, rkbuf->rkbuf_wof);
+        rd_kafka_assert(NULL, rkbuf->rkbuf_wof < INT32_MAX);
+        return rd_kafkap_bytes_new(rkbuf->rkbuf_wbuf, (int32_t) rkbuf->rkbuf_wof);
 }
 
 
