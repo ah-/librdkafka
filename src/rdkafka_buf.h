@@ -39,7 +39,7 @@ typedef struct rd_kafka_broker_s rd_kafka_broker_t;
 /* Advance/allocate used space in marshall buffer.
  * Point PTR to available space of size LEN on success. */
 #define _MSH_ALLOC(rkbuf,PTR,LEN)  do {					\
-                int __LEN = (LEN);                                      \
+                size_t __LEN = (LEN);                                      \
                 if (msh_of + __LEN >= msh_size)                         \
                         rd_kafka_buf_parse_fail(rkbuf,			\
 						"Not enough room in marshall buffer: " \

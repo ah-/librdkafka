@@ -1417,11 +1417,11 @@ rd_kafka_parse_Metadata (rd_kafka_broker_t *rkb,
                          rd_kafka_itopic_t *rkt, rd_kafka_buf_t *rkbuf) {
 	int i, j, k;
 	int req_rkt_seen = 0;
-        char *msh_buf = NULL;
-        int   msh_of  = 0;
-        int   msh_size;
+        char  *msh_buf = NULL;
+        size_t msh_of  = 0;
+        size_t msh_size;
         struct rd_kafka_metadata *md = NULL;
-        int rkb_namelen;
+        size_t rkb_namelen;
         const int log_decode_errors = 1;
 
         rd_kafka_broker_lock(rkb);
