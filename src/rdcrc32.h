@@ -98,7 +98,9 @@ static __inline RD_UNUSED
 rd_crc32_t rd_crc32_update(rd_crc32_t crc, const unsigned char *data, size_t data_len)
 {
 #if WITH_ZLIB
+#pragma warning (disable:4267)
         return crc32(crc, data, data_len);
+#pragma warning (default:4267)
 #else
     unsigned int tbl_idx;
 

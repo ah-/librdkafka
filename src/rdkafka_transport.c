@@ -149,6 +149,7 @@ rd_kafka_transport_socket_sendmsg (rd_kafka_transport_t *rktrans,
 	for (i = 0; i < msg->msg_iovlen; i++) {
 		ssize_t r;
 
+#pragma warning (disable:4267)
 		r = send(rktrans->rktrans_s,
 			 msg->msg_iov[i].iov_base, msg->msg_iov[i].iov_len, 0);
 		if (r == SOCKET_ERROR) {

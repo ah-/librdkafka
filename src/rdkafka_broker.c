@@ -1079,6 +1079,7 @@ int rd_kafka_socket_cb_generic (int domain, int type, int protocol,
                                 void *opaque) {
         int s;
         int on = 1;
+#pragma warning (disable:4244)
         s = socket(domain, type, protocol);
         if (s == -1)
                 return -1;
@@ -1875,6 +1876,7 @@ static void rd_kafka_broker_op_serve (rd_kafka_broker_t *rkb,
                                            "Nodename changed from %s to %s",
                                            rkb->rkb_nodename,
                                            (char *)rko->rko_nodename);
+#pragma warning (disable:4996)
                                 strncpy(rkb->rkb_nodename, rko->rko_nodename,
                                         sizeof(rkb->rkb_nodename)-1);
                                 updated |= _UPD_NAME;

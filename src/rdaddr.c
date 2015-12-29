@@ -121,6 +121,7 @@ const char *rd_addrinfo_prepare (const char *nodesvc,
 		/* Optional ":service" definition. */
 		if (strlen(svct) >= sizeof(ssvc))
 			return "Service name too long";
+#pragma warning (disable:4996)
 		strcpy(ssvc, svct);
 		if (!nodelen)
 			nodelen = svct - nodesvc - 1;

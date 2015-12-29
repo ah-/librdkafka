@@ -1,3 +1,4 @@
+#pragma warning (disable:4244)
 /*
  * C port of the snappy compressor from Google.
  * This is a very fast compressor with comparable compression to lzo.
@@ -283,6 +284,7 @@ struct source {
 /* Only valid at beginning when nothing is consumed */
 static inline int available(struct source *s)
 {
+#pragma warning (disable:4267)
 	return s->total;
 }
 
