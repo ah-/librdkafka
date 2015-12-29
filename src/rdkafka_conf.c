@@ -653,7 +653,7 @@ static rd_kafka_conf_res_t
 rd_kafka_anyconf_set_prop0 (int scope, void *conf,
 			    const struct rd_kafka_property *prop,
 			    const char *istr, int ival,
-                            char *errstr, int errstr_size) {
+                            char *errstr, size_t errstr_size) {
 #define _RK_PTR(TYPE,BASE,OFFSET)  (TYPE)(((char *)(BASE))+(OFFSET))
 	switch (prop->type)
 	{
