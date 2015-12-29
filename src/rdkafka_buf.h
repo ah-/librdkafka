@@ -550,7 +550,7 @@ static __inline int rd_kafka_buf_write_bytes (rd_kafka_buf_t *rkbuf,
         int r;
         if (!payload)
                 size = RD_KAFKAP_BYTES_LEN_NULL;
-        r = rd_kafka_buf_write_i32(rkbuf, size);
+        r = rd_kafka_buf_write_i32(rkbuf, (int32_t) size);
         if (payload)
                 r = rd_kafka_buf_write(rkbuf, payload, size);
         return r;

@@ -487,7 +487,7 @@ static int rd_kafka_transport_ssl_passwd_cb (char *buf, int size, int rwflag,
 	}
 
 
-	pwlen = strlen(rk->rk_conf.ssl.key_password);
+	pwlen = (int) strlen(rk->rk_conf.ssl.key_password);
 	memcpy(buf, rk->rk_conf.ssl.key_password, RD_MIN(pwlen, size));
 
 	return pwlen;
