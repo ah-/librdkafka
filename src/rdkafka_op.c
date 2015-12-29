@@ -313,7 +313,7 @@ rd_kafka_op_t *rd_kafka_op_new_reply (rd_kafka_op_t *rko_orig) {
  */
 int rd_kafka_op_reply (rd_kafka_op_t *rko_orig,
                        rd_kafka_resp_err_t err,
-                       void *payload, int len, void (*free_cb) (void *)) {
+                       void *payload, size_t len, void (*free_cb) (void *)) {
         rd_kafka_op_t *rko;
 
         if (!rko_orig->rko_replyq)
