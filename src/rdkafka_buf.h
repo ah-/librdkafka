@@ -569,7 +569,7 @@ int rd_kafka_buf_write_Message (rd_kafka_buf_t *rkbuf,
 				int64_t Offset, int8_t MagicByte,
 				int8_t Attributes,
 				const rd_kafkap_bytes_t *key,
-				const void *payload, int len,
+				const void *payload, int32_t len,
 				int *outlenp);
 
 /**

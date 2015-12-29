@@ -1652,10 +1652,11 @@ static int rd_kafka_compress_MessageSet_buf (rd_kafka_broker_t *rkb,
 	 * Message containing the compressed payload. */
 	rd_kafka_buf_rewind(rkbuf, iov_firstmsg, of_firstmsg, of_init_firstmsg);
 
+	rd_kafka_assert(rkb->rkb_rk, coutlen < INT32_MAX);
 	rd_kafka_buf_write_Message(rkbuf, 0, 0,
 				   rktp->rktp_rkt->rkt_conf.compression_codec,
 				   rkb->rkb_rk->rk_null_bytes,
-				   (void *)siov.iov_base, coutlen,
+				   (void *)siov.iov_base, (int32_t) coutlen,
 				   &outlen);
 
 	/* Update enveloping MessageSet's length. */
@@ -1774,10 +1775,11 @@ static int rd_kafka_broker_produce_toppar (rd_kafka_broker_t *rkb,
 		msgcnt--;
 
 		/* Write message to buffer */
+		rd_kafka_assert(rkb->rkb_rk, rkm->rkm_len < INT32_MAX);
 		rd_kafka_buf_write_Message(rkbuf, 0, 0,
 					   RD_KAFKA_COMPRESSION_NONE,
 					   rkm->rkm_key,
-					   rkm->rkm_payload, rkm->rkm_len,
+					   rkm->rkm_payload, (int32_t) rkm->rkm_len,
 					   &outlen);
 
 		MessageSetSize += outlen;
