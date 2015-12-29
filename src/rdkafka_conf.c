@@ -1318,7 +1318,7 @@ rd_kafka_anyconf_get0 (const void *conf, const struct rd_kafka_property *prop,
         {
                 const int ival = *_RK_PTR(const int *, conf, prop->offset);
                 int phase = 0;
-                int of = 0;
+                size_t of = 0;
 
                 /* Phase 1: scan for set flags, accumulate needed size.
                  * Phase 2: write to dest */
@@ -1372,7 +1372,7 @@ rd_kafka_anyconf_get0 (const void *conf, const struct rd_kafka_property *prop,
         val_len = strlen(val);
 
         if (dest) {
-                int use_len = RD_MIN(val_len, (*dest_size)-1);
+                size_t use_len = RD_MIN(val_len, (*dest_size)-1);
                 memcpy(dest, val, use_len);
                 dest[use_len] = '\0';
         }
