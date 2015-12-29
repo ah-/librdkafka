@@ -511,7 +511,7 @@ static void rd_kafka_buf_finalize (rd_kafka_t *rk, rd_kafka_buf_t *rkbuf,
 	rkbuf->rkbuf_of          = 0;  /* Indicates send position */
 	rkbuf->rkbuf_len         = rd_kafka_msghdr_size(&rkbuf->rkbuf_msg);
 
-	rd_kafka_buf_update_i32(rkbuf, of_Size, rkbuf->rkbuf_len-4);
+	rd_kafka_buf_update_i32(rkbuf, of_Size, (int32_t) rkbuf->rkbuf_len-4);
 }
 
 
