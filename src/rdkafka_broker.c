@@ -493,7 +493,7 @@ static void rd_kafka_broker_buf_enq0 (rd_kafka_broker_t *rkb,
  */
 static void rd_kafka_buf_finalize (rd_kafka_t *rk, rd_kafka_buf_t *rkbuf,
 				   int16_t ApiKey) {
-	int of_Size;
+	size_t of_Size;
 
 	rkbuf->rkbuf_reqhdr.ApiKey = ApiKey;
 
@@ -1684,7 +1684,7 @@ static int rd_kafka_broker_produce_toppar (rd_kafka_broker_t *rkb,
 	int iov_firstmsg;
 	size_t of_firstmsg;
 	size_t of_init_firstmsg;
-	int of_MessageSetSize;
+	size_t of_MessageSetSize;
 	int32_t MessageSetSize = 0;
 	int outlen;
 
@@ -3026,9 +3026,9 @@ static int rd_kafka_broker_fetch_toppars (rd_kafka_broker_t *rkb) {
 	int cnt = 0;
         int max_cnt;
 	int iov_cnt;
-	int of_TopicArrayCnt = 0;
+	size_t of_TopicArrayCnt = 0;
 	int TopicArrayCnt = 0;
-	int of_PartitionArrayCnt = 0;
+	size_t of_PartitionArrayCnt = 0;
 	int PartitionArrayCnt = 0;
 	rd_kafka_itopic_t *rkt_last = NULL;
 

@@ -389,7 +389,7 @@ static __inline RD_UNUSED void *rd_kafka_buf_at (rd_kafka_buf_t *rkbuf,
  * NOTE: rd_kafka_buf_update() MUST NOT be called when a CRC calculation
  *       is in progress (between rd_kafka_buf_crc_init() & .._crc_finalize())
  */
-static __inline void rd_kafka_buf_update (rd_kafka_buf_t *rkbuf, int of,
+static __inline void rd_kafka_buf_update (rd_kafka_buf_t *rkbuf, size_t of,
                                           const void *data, size_t len) {
         size_t remain = rkbuf->rkbuf_size - (of + len);
         rd_kafka_assert(NULL, remain >= 0);
@@ -412,7 +412,7 @@ static __inline size_t rd_kafka_buf_write_i8 (rd_kafka_buf_t *rkbuf,
  * 'of' should have been previously returned by `.._buf_write_i8()`.
  */
 static __inline void rd_kafka_buf_update_i8 (rd_kafka_buf_t *rkbuf,
-					     int of, int8_t v) {
+					     size_t of, int8_t v) {
         rd_kafka_buf_update(rkbuf, of, &v, sizeof(v));
 }
 
@@ -431,7 +431,7 @@ static __inline size_t rd_kafka_buf_write_i16 (rd_kafka_buf_t *rkbuf,
  * 'of' should have been previously returned by `.._buf_write_i16()`.
  */
 static __inline void rd_kafka_buf_update_i16 (rd_kafka_buf_t *rkbuf,
-                                              int of, int16_t v) {
+                                              size_t of, int16_t v) {
         v = htobe16(v);
         rd_kafka_buf_update(rkbuf, of, &v, sizeof(v));
 }
@@ -451,7 +451,7 @@ static __inline size_t rd_kafka_buf_write_i32 (rd_kafka_buf_t *rkbuf,
  * 'of' should have been previously returned by `.._buf_write_i32()`.
  */
 static __inline void rd_kafka_buf_update_i32 (rd_kafka_buf_t *rkbuf,
-                                              int of, int32_t v) {
+                                              size_t of, int32_t v) {
         v = htobe32(v);
         rd_kafka_buf_update(rkbuf, of, &v, sizeof(v));
 }
@@ -461,7 +461,7 @@ static __inline void rd_kafka_buf_update_i32 (rd_kafka_buf_t *rkbuf,
  * 'of' should have been previously returned by `.._buf_write_i32()`.
  */
 static __inline void rd_kafka_buf_update_u32 (rd_kafka_buf_t *rkbuf,
-                                              int of, uint32_t v) {
+                                              size_t of, uint32_t v) {
         v = htobe32(v);
         rd_kafka_buf_update(rkbuf, of, &v, sizeof(v));
 }
@@ -481,7 +481,7 @@ static __inline size_t rd_kafka_buf_write_i64 (rd_kafka_buf_t *rkbuf, int64_t v)
  * 'of' should have been previously returned by `.._buf_write_i64()`.
  */
 static __inline void rd_kafka_buf_update_i64 (rd_kafka_buf_t *rkbuf,
-                                              int of, int64_t v) {
+                                              size_t of, int64_t v) {
         v = htobe64(v);
         rd_kafka_buf_update(rkbuf, of, &v, sizeof(v));
 }
@@ -565,12 +565,12 @@ static __inline size_t rd_kafka_buf_write_bytes (rd_kafka_buf_t *rkbuf,
  *
  * Returns the buffer offset of the first byte.
  */
-int rd_kafka_buf_write_Message (rd_kafka_buf_t *rkbuf,
-				int64_t Offset, int8_t MagicByte,
-				int8_t Attributes,
-				const rd_kafkap_bytes_t *key,
-				const void *payload, int32_t len,
-				int *outlenp);
+size_t rd_kafka_buf_write_Message (rd_kafka_buf_t *rkbuf,
+				   int64_t Offset, int8_t MagicByte,
+				   int8_t Attributes,
+				   const rd_kafkap_bytes_t *key,
+				   const void *payload, int32_t len,
+				   int *outlenp);
 
 /**
  * Start calculating CRC from now and track it in '*crcp'.

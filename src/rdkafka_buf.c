@@ -303,15 +303,15 @@ void rd_kafka_bufq_purge (rd_kafka_broker_t *rkb,
 
 
 
-int rd_kafka_buf_write_Message (rd_kafka_buf_t *rkbuf,
-				int64_t Offset, int8_t MagicByte,
-				int8_t Attributes,
-				const rd_kafkap_bytes_t *key,
-				const void *payload, int32_t len,
-				int *outlenp) {
+size_t rd_kafka_buf_write_Message (rd_kafka_buf_t *rkbuf,
+				   int64_t Offset, int8_t MagicByte,
+				   int8_t Attributes,
+				   const rd_kafkap_bytes_t *key,
+				   const void *payload, int32_t len,
+				   int *outlenp) {
 	int32_t MessageSize;
-	int begin_of;
-	int of_Crc;
+	size_t begin_of;
+	size_t of_Crc;
 
 	/*
 	 * MessageSet's per-Message header.
@@ -358,7 +358,7 @@ int rd_kafka_buf_write_Message (rd_kafka_buf_t *rkbuf,
 		rd_kafka_buf_push(rkbuf, payload, len);
 
 	/* Finalize Crc */
-	rd_kafka_buf_update_u32(rkbuf, of_Crc,
+	rd_kafka_buf_update_u32(rkbuf, (uint32_t) of_Crc,
 				rd_kafka_buf_crc_finalize(rkbuf));
 
 
