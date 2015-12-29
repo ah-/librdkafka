@@ -1491,8 +1491,8 @@ done:
 static int rd_kafka_compress_MessageSet_buf (rd_kafka_broker_t *rkb,
 					     rd_kafka_toppar_t *rktp,
 					     rd_kafka_buf_t *rkbuf,
-					     int iov_firstmsg, int of_firstmsg,
-						 int of_init_firstmsg,
+					     int iov_firstmsg, size_t of_firstmsg,
+						 size_t of_init_firstmsg,
 					     int32_t *MessageSetSizep) {
 	int32_t MessageSetSize = *MessageSetSizep;
 	size_t coutlen = 0;
@@ -1681,8 +1681,8 @@ static int rd_kafka_broker_produce_toppar (rd_kafka_broker_t *rkb,
 	rd_kafka_itopic_t *rkt = rktp->rktp_rkt;
 	int iovcnt;
 	int iov_firstmsg;
-	int of_firstmsg;
-	int of_init_firstmsg;
+	size_t of_firstmsg;
+	size_t of_init_firstmsg;
 	int of_MessageSetSize;
 	int32_t MessageSetSize = 0;
 	int outlen;

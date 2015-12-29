@@ -77,8 +77,8 @@ void rd_kafka_buf_alloc_recvbuf (rd_kafka_buf_t *rkbuf, size_t size) {
 /**
  * Rewind write offset pointer and iovec poiner to a previous stored value.
  */
-void rd_kafka_buf_rewind (rd_kafka_buf_t *rkbuf, int iovindex, int new_of,
-	int new_of_init) {
+void rd_kafka_buf_rewind (rd_kafka_buf_t *rkbuf, int iovindex, size_t new_of,
+	size_t new_of_init) {
 	rkbuf->rkbuf_msg.msg_iovlen = iovindex;
 	rkbuf->rkbuf_wof = new_of;
 	rkbuf->rkbuf_wof_init = new_of_init;
