@@ -36,7 +36,7 @@
  */
 
 typedef struct rd_list_s {
-        int    rl_size;
+        size_t rl_size;
         int    rl_cnt;
         void **rl_elems;
 	void (*rl_free_cb) (void *);
@@ -47,7 +47,7 @@ typedef struct rd_list_s {
 /**
  * Initialize a list, preallocate space for 'initial_size' elements (optional)
  */
-void rd_list_init (rd_list_t *rl, int initial_size);
+void rd_list_init (rd_list_t *rl, size_t initial_size);
 
 
 /**
@@ -55,7 +55,7 @@ void rd_list_init (rd_list_t *rl, int initial_size);
  *
  * Use rd_list_destroy() to free.
  */
-rd_list_t *rd_list_new (int initial_size);
+rd_list_t *rd_list_new (size_t initial_size);
 
 
 /**
@@ -113,7 +113,7 @@ void rd_list_destroy (rd_list_t *rl, void (*free_cb) (void *));
  *    while ((obj = rd_list_elem(rl, i++)))
  *        do_something(obj);
  */
-void *rd_list_elem (const rd_list_t *rl, int idx);
+void *rd_list_elem (const rd_list_t *rl, size_t idx);
 
 #define RD_LIST_FOREACH(elem,listp,idx) \
         for (idx = 0 ; (elem = rd_list_elem(listp, idx)) ; idx++)
@@ -125,7 +125,7 @@ void *rd_list_elem (const rd_list_t *rl, int idx);
 /**
  * Returns the number of elements in list.
  */
-static __inline RD_UNUSED int rd_list_cnt (const rd_list_t *rl) {
+static __inline RD_UNUSED size_t rd_list_cnt (const rd_list_t *rl) {
         return rl->rl_cnt;
 }
 

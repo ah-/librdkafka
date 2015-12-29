@@ -31,27 +31,27 @@
 
 
 void rd_list_dump (const char *what, const rd_list_t *rl) {
-        int i;
-        printf("%s: (rd_list_t*)%p cnt %d, size %d, elems %p:\n",
+        size_t i;
+        printf("%s: (rd_list_t*)%p cnt %zu, size %zu, elems %zu:\n",
                what, rl, rl->rl_cnt, rl->rl_size, rl->rl_elems);
         for (i = 0 ; i < rl->rl_cnt ; i++)
                 printf("  #%d: %p at &%p\n", i,
                        rl->rl_elems[i], &rl->rl_elems[i]);
 }
 
-static void rd_list_grow (rd_list_t *rl, int add_size) {
+static void rd_list_grow (rd_list_t *rl, size_t add_size) {
         rl->rl_size += add_size;
         rl->rl_elems = rd_realloc(rl->rl_elems,
                                   sizeof(*rl->rl_elems) * rl->rl_size);
 }
 
-void rd_list_init (rd_list_t *rl, int initial_size) {
+void rd_list_init (rd_list_t *rl, size_t initial_size) {
         memset(rl, 0, sizeof(*rl));
 
         rd_list_grow(rl, initial_size);
 }
 
-rd_list_t *rd_list_new (int initial_size) {
+rd_list_t *rd_list_new (size_t initial_size) {
 	rd_list_t *rl = malloc(sizeof(*rl));
 	rd_list_init(rl, initial_size);
 	rl->rl_allocated = 1;
@@ -70,7 +70,7 @@ void rd_list_add (rd_list_t *rl, void *elem) {
         rl->rl_elems[rl->rl_cnt++] = elem;
 }
 
-static void rd_list_remove0 (rd_list_t *rl, int idx) {
+static void rd_list_remove0 (rd_list_t *rl, size_t idx) {
         rd_assert(idx < rl->rl_cnt);
 
         if (idx + 1 < rl->rl_cnt)
@@ -82,7 +82,7 @@ static void rd_list_remove0 (rd_list_t *rl, int idx) {
 
 void *rd_list_remove (rd_list_t *rl, void *match_elem) {
         void *elem;
-        int i;
+        size_t i;
 
         RD_LIST_FOREACH(elem, rl, i) {
                 if (elem == match_elem) {
@@ -98,7 +98,7 @@ void *rd_list_remove (rd_list_t *rl, void *match_elem) {
 void *rd_list_remove_cmp (rd_list_t *rl, void *match_elem,
                           int (*cmp) (void *_a, void *_b)) {
         void *elem;
-        int i;
+        size_t i;
 
         RD_LIST_FOREACH(elem, rl, i) {
                 if (match_elem == cmp ||
@@ -127,7 +127,7 @@ void rd_list_destroy (rd_list_t *rl, void (*free_cb) (void *)) {
 		free_cb = rl->rl_free_cb;
 
         if (rl->rl_elems) {
-                int i;
+                size_t i;
                 if (free_cb) {
                         for (i = 0 ; i < rl->rl_cnt ; i++)
                                 if (rl->rl_elems[i])
@@ -141,7 +141,7 @@ void rd_list_destroy (rd_list_t *rl, void (*free_cb) (void *)) {
 }
 
 
-void *rd_list_elem (const rd_list_t *rl, int idx) {
+void *rd_list_elem (const rd_list_t *rl, size_t idx) {
         if (likely(idx < rl->rl_cnt))
                 return (void *)rl->rl_elems[idx];
         return NULL;
@@ -149,7 +149,7 @@ void *rd_list_elem (const rd_list_t *rl, int idx) {
 
 void *rd_list_find (const rd_list_t *rl, const void *match,
                     int (*cmp) (const void *, const void *)) {
-        int i;
+        size_t i;
         const void *elem;
 
         RD_LIST_FOREACH(elem, rl, i) {
