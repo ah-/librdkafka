@@ -136,7 +136,7 @@ void rd_kafka_op_app_reply (rd_kafka_q_t *rkq,
                             rd_kafka_op_type_t type,
                             rd_kafka_resp_err_t err,
                             int32_t version,
-                            void *payload, int len) {
+                            void *payload, size_t len) {
 	rd_kafka_op_t *rko;
 
         rko = rd_kafka_op_new(type);
@@ -227,7 +227,7 @@ void rd_kafka_q_op_err (rd_kafka_q_t *rkq, rd_kafka_resp_err_t err,
 void rd_kafka_op_app (rd_kafka_q_t *rkq, rd_kafka_op_type_t type,
                       int op_flags, rd_kafka_toppar_t *rktp,
                       rd_kafka_resp_err_t err,
-                      void *payload, int len,
+                      void *payload, size_t len,
                       void (*free_cb) (void *)) {
         rd_kafka_op_t *rko;
 
