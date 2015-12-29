@@ -640,7 +640,7 @@ void rd_kafka_transport_ssl_ctx_term (rd_kafka_t *rk) {
  * NOTE: rd_kafka_wrlock() MUST be held
  */
 int rd_kafka_transport_ssl_ctx_init (rd_kafka_t *rk,
-				     char *errstr, int errstr_size) {
+				     char *errstr, size_t errstr_size) {
 	int r;
 	SSL_CTX *ctx;
 

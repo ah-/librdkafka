@@ -478,7 +478,7 @@ static void rtrim (char *s) {
 /**
  * Initialize assignor list based on configuration.
  */
-int rd_kafka_assignors_init (rd_kafka_t *rk, char *errstr, int errstr_size) {
+int rd_kafka_assignors_init (rd_kafka_t *rk, char *errstr, size_t errstr_size) {
 	char *wanted;
 	char *s;
 
