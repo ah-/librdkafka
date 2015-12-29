@@ -223,7 +223,7 @@ static __inline RD_UNUSED int rd_kafkap_str_cmp (const rd_kafkap_str_t *a,
 
 static __inline RD_UNUSED int rd_kafkap_str_cmp_str (const rd_kafkap_str_t *a,
 						     const char *str) {
-	int len = strlen(str);
+	ssize_t len = strlen(str);
 	if (a->len != len)
 		return -1;
 	return memcmp(a->str, str, a->len);
