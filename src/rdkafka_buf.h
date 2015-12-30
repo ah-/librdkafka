@@ -350,7 +350,7 @@ static __inline RD_UNUSED void rd_kafka_buf_write_seek (rd_kafka_buf_t *rkbuf,
  */
 static __inline size_t rd_kafka_buf_write (rd_kafka_buf_t *rkbuf,
                                         const void *data, size_t len) {
-        size_t remain = rkbuf->rkbuf_size - (rkbuf->rkbuf_wof + len);
+        ssize_t remain = rkbuf->rkbuf_size - (rkbuf->rkbuf_wof + len);
 
         /* Make sure there's enough room, else increase buffer. */
         if (remain < 0)
@@ -372,7 +372,7 @@ static __inline size_t rd_kafka_buf_write (rd_kafka_buf_t *rkbuf,
  */
 static __inline RD_UNUSED void *rd_kafka_buf_at (rd_kafka_buf_t *rkbuf,
 						 int of, int len) {
-	size_t remain = rkbuf->rkbuf_size - (of + len);
+	ssize_t remain = rkbuf->rkbuf_size - (of + len);
 
 	if (remain < 0)
 		return NULL;
@@ -391,7 +391,7 @@ static __inline RD_UNUSED void *rd_kafka_buf_at (rd_kafka_buf_t *rkbuf,
  */
 static __inline void rd_kafka_buf_update (rd_kafka_buf_t *rkbuf, size_t of,
                                           const void *data, size_t len) {
-        size_t remain = rkbuf->rkbuf_size - (of + len);
+        ssize_t remain = rkbuf->rkbuf_size - (of + len);
         rd_kafka_assert(NULL, remain >= 0);
         rd_kafka_assert(NULL, of >= 0 && of < (int)rkbuf->rkbuf_size);
 	rd_kafka_assert(NULL, !(rkbuf->rkbuf_flags & RD_KAFKA_OP_F_CRC));
